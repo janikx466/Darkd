@@ -2,73 +2,85 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Dark Diamonds</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Fire Diamonds Store</title>
-
 <style>
-body {
-    margin: 0;
+body{
+    margin:0;
     font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #ffffff;
+    background:#0f172a;
+    color:white;
 }
-header {
-    background: #020617;
-    padding: 15px;
-    text-align: center;
+header{
+    background:#020617;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
 }
-header h1 {
-    color: #22c55e;
+header h1{
+    color:#38bdf8;
 }
-nav a {
-    color: #fff;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
+.container{
+    display:flex;
+    flex-wrap:wrap;
 }
-section {
-    padding: 30px 20px;
-    text-align: center;
+.sidebar{
+    width:220px;
+    background:#020617;
+    padding:20px;
+    text-align:center;
+    flex-shrink:0;
 }
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+.sidebar img{
+    width:90px;
+    height:90px;          /* ✅ added */
+    border-radius:50%;
+    object-fit:cover;     /* ✅ added */
+    margin-bottom:10px;
 }
-.card {
-    background: #020617;
-    padding: 20px;
-    border-radius: 10px;
+.main{
+    flex:1;
+    padding:20px;
 }
-.card h3 {
-    color: #38bdf8;
+.card{
+    background:#020617;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:15px;
 }
-button {
-    background: #22c55e;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+button{
+    background:#38bdf8;
+    border:none;
+    padding:8px 15px;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:8px;
 }
-button:hover {
-    background: #16a34a;
+input, select{
+    width:100%;
+    padding:8px;
+    margin:5px 0;
+    border-radius:5px;
+    border:none;
 }
-form {
-    max-width: 400px;
-    margin: auto;
-    background: #020617;
-    padding: 20px;
-    border-radius: 10px;
+.admin{
+    margin-top:20px;
 }
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+.price{
+    margin:6px 0;
 }
-footer {
-    background: #020617;
-    padding: 15px;
-    font-size: 14px;
+ul{
+    padding-left:20px;
+}
+@media(max-width:768px){
+    .container{
+        flex-direction:column;
+    }
+    .sidebar{
+        width:100%;
+    }
 }
 </style>
 </head>
@@ -76,78 +88,146 @@ footer {
 <body>
 
 <header>
-    <h1>Free Fire Diamonds Store</h1>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#buy">Buy Diamonds</a>
-        <a href="#order">Order</a>
-        <a href="#contact">Support</a>
-    </nav>
+    <h1>Dark Diamonds</h1>
+    <div>Free Fire Diamonds Store</div>
 </header>
 
-<section id="home">
-    <h2>Instant Free Fire Diamonds Top-Up</h2>
-    <p>Fast delivery • Safe payment • No login required</p>
-</section>
+<div class="container">
 
-<section id="buy">
-    <h2>Diamond Packages</h2>
-    <div class="products">
-        <div class="card"><h3>240 Diamonds</h3><p>Price: 100</p></div>
-        <div class="card"><h3>560 Diamonds</h3><p>Price: 250</p></div>
-        <div class="card"><h3>1,060 Diamonds</h3><p>Price: 500</p></div>
-        <div class="card"><h3>2,500 Diamonds</h3><p>Price: 1,000</p></div>
+<!-- Sidebar -->
+<div class="sidebar">
+    <img src="https://res.cloudinary.com/dv2pntqsr/image/upload/v1770459705/raxfqjabyvd9uzb5y4pt.jpg" alt="Admin">
+    <h3>Tayyab</h3>
+    <p>Admin</p>
+    <p>📞 03036116590</p>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <!-- Diamond Packages -->
+    <div class="card">
+        <h2>Free Fire Diamonds Packages</h2>
+        <div class="price">100 PKR = <b>240 Diamonds</b></div>
+        <button onclick="buy(100)">Buy Now</button>
+        <div class="price">200 PKR = <b>550 Diamonds</b></div>
+        <button onclick="buy(200)">Buy Now</button>
+        <div class="price">300 PKR = <b>990 Diamonds</b></div>
+        <button onclick="buy(300)">Buy Now</button>
     </div>
-</section>
 
-<section id="order">
-    <h2>Place Your Order</h2>
+    <!-- Signup Form -->
+    <div class="card">
+        <h3>User Signup</h3>
+        <input type="text" id="name" placeholder="Username">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="signup()">Signup</button>
+    </div>
 
-    <form onsubmit="sendWhatsApp(); return false;">
-        <input type="text" id="playerid" placeholder="Free Fire Player ID" required>
-        <input type="text" id="mobile" placeholder="Mobile Number" required>
+    <!-- Payment Screenshot Upload -->
+    <div class="card">
+        <h3>Payment Confirmation</h3>
+        <input type="text" id="playerId" placeholder="Enter Player ID">
+        <input type="file" id="paymentProof" accept="image/*">
+        <button onclick="uploadProof()">Upload Proof</button>
+    </div>
 
-        <select id="package">
-            <option>240 Diamonds – 100</option>
-            <option>560 Diamonds – 250</option>
-            <option>1,060 Diamonds – 500</option>
-            <option>2,500 Diamonds – 1,000</option>
-        </select>
+    <!-- Admin Panel (Demo) -->
+    <div class="card admin">
+        <h3>Admin Panel</h3>
+        <input type="email" id="adminEmail" placeholder="Admin Email">
+        <input type="password" id="adminPass" placeholder="Admin Password">
+        <button onclick="loginAdmin()">Login as Admin</button>
+        <div id="adminSection" style="display:none;">
+            <h4>Registered Users</h4>
+            <ul id="users"></ul>
+            <h4>Uploaded Payment Proofs</h4>
+            <ul id="proofs"></ul>
+        </div>
+    </div>
 
-        <select id="payment">
-            <option>JazzCash</option>
-            <option>EasyPaisa</option>
-        </select>
-
-        <button type="submit">Order Diamonds</button>
-    </form>
-</section>
-
-<section id="contact">
-    <h2>Customer Support</h2>
-    <p>WhatsApp Support Available 24/7</p>
-</section>
-
-<footer>
-    <p>Disclaimer: This website is not affiliated with Garena Free Fire.</p>
-</footer>
+</div>
+</div>
 
 <script>
-function sendWhatsApp() {
-    let player = document.getElementById("playerid").value;
-    let mobile = document.getElementById("mobile").value;
-    let pack = document.getElementById("package").value;
-    let pay = document.getElementById("payment").value;
+// User Signup
+function signup(){
+    let name = document.getElementById("name").value;
+    let pass = document.getElementById("pass").value;
 
-    let message = `Free Fire Diamonds Order%0A
-Player ID: ${player}%0A
-Mobile: ${mobile}%0A
-Package: ${pack}%0A
-Payment Method: ${pay}`;
+    if(name === "" || pass === ""){
+        alert("Please fill all fields");
+        return;
+    }
 
-    window.open("https://wa.me/923036116590?text=" + message, "_blank");
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push({username:name, password:pass});
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Signup Successful");
+}
+
+// Show Users (Admin)
+function showUsers(){
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let list = document.getElementById("users");
+    list.innerHTML = "";
+    users.forEach(u=>{
+        let li = document.createElement("li");
+        li.innerText = u.username;
+        list.appendChild(li);
+    });
+}
+
+// Buy Packages
+function buy(amount){
+    let msg = `Hello, I want to buy Free Fire Diamonds.\nPackage: ${amount} PKR\nWebsite: Dark Diamonds`;
+    let url = `https://wa.me/923036116590?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
+}
+
+// Upload Payment Proof
+function uploadProof(){
+    let playerId = document.getElementById("playerId").value;
+    let proof = document.getElementById("paymentProof").files[0];
+
+    if(!playerId || !proof){
+        alert("Please enter Player ID and select proof image");
+        return;
+    }
+
+    let proofs = JSON.parse(localStorage.getItem("proofs")) || [];
+    proofs.push({player:playerId, file:proof.name});
+    localStorage.setItem("proofs", JSON.stringify(proofs));
+    alert("Proof uploaded (Demo only, not saved on server)");
+}
+
+// Admin Login (Demo)
+function loginAdmin(){
+    let email = document.getElementById("adminEmail").value;
+    let pass = document.getElementById("adminPass").value;
+
+    if(email === "tayyabgaming100@gmail.com" && pass === "112211"){
+        alert("Admin Logged In");
+        document.getElementById("adminSection").style.display="block";
+        showUsers();
+        showProofs();
+    } else {
+        alert("Invalid admin credentials");
+    }
+}
+
+// Show uploaded proofs
+function showProofs(){
+    let proofs = JSON.parse(localStorage.getItem("proofs")) || [];
+    let list = document.getElementById("proofs");
+    list.innerHTML="";
+    proofs.forEach(p=>{
+        let li = document.createElement("li");
+        li.innerText = `${p.player} - ${p.file}`;
+        list.appendChild(li);
+    });
 }
 </script>
 
 </body>
-  </html>
+    </html>
